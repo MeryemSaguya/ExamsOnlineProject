@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Créer un Examen - Evalio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fcfeff, #ffffff, #ffffff);
+      color: rgb(255, 255, 255);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 40px;
+      background: rgba(20, 85, 251, 0.05);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 30px rgba(4, 4, 4, 0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #ff6600;
+    }
+
+    .stepper {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .step {
+      text-align: center;
+      flex: 4;
+      position: relative;
+      color: #ed4908;
+    }
+
+    .step.active {
+      color: #2e6fd7;
+      font-weight: bold;
+    }
+
+    .step::before {
+      content: attr(data-step);
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 50%;
+      background-color: #2e6fd7;
+      color: rgb(255, 255, 255);
+      margin-bottom: 10px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .step.active::before {
+      background-color: #fd7106;
+      color: rgb(255, 253, 253);
+    }
+
+    .line {
+      position: absolute;
+      height: 5px;
+      width: 100%;
+      background-color: #3183ee0e;
+      top: 20px;
+      left: 0;
+      z-index: -1;
+    }
+
+    .form-step {
+      display: none;
+    }
+
+    .form-step.active {
+      display: block;
+    }
+
+    label {
+      display: block;
+      margin-top: 30px;
+      margin-bottom: 5px;
+      font-weight: 800;
+      color: #2e6fd7;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 15px;
+      font-size: 18px;
+      background: rgba(11, 22, 221, 0.119);
+      color: white;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #2e6fd7;
+      font-size: 16px;
+     
+    }
+
+    .question-box {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 12px;
+      background-color: rgb(0, 0, 0);
+      border: 1px solid rgba(238, 238, 238, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .buttons button {
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      background-color: #fd7106;
+      color: rgb(250, 246, 246);
+      transition: background-color 0.2s ease;
+    }
+
+    .buttons button:hover {
+      background-color: #2e6fd7;
+    }
+
+    .review-section {
+      background: rgba(243, 241, 241, 0.07);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+
+    .add-question-btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: rgb(62, 93, 229);
+      color: #000;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .add-question-btn:hover {
+      background: #2e6fd7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Créer votre examen</h1>
+
+    <!-- Stepper -->
+    <div class="stepper">
+      <div class="line"></div>
+      <div class="step active" data-step="1">Informations</div>
+      <div class="step" data-step="2">Questions</div>
+      <div class="step" data-step="3">Aperçu</div>
+    </div>
+
+    <!-- Step 1: Exam Info -->
+    <div class="form-step active" id="step-1">
+      <label>Titre de l'examen</label>
+      <input type="text" placeholder="Ex: Examen JavaScript - Niveau 1">
+
+      <label>Description</label>
+      <textarea rows="3" placeholder="Brève description ou instructions pour les étudiants"></textarea>
+
+      <label>Durée (en minutes)</label>
+      <input type="number" placeholder="Ex: 60">
+
+      <label>Note minimale pour réussir (%)</label>
+      <input type="number" placeholder="Ex: 50">
+    </div>
+
+    <!-- Step 2: Add Questions -->
+    <div class="form-step" id="step-2">
+      <div id="questions-container">
+        <div class="question-box">
+          <label>Type de question</label>
+          <select>
+            <option value="mcq">QCM</option>
+            <option value="direct">Question Directe</option>
+          </select>
+
+          <label>Énoncé</label>
+          <textarea rows="2" placeholder="Ex: Quelle est la capitale de l’Italie ?"></textarea>
+
+          <label>Options (QCM) – ajoutez plusieurs options avec le bouton plus tard</label>
+          <textarea rows="2" placeholder="Ex: Rome, Paris, Madrid... (via JS plus tard)"></textarea>
+
+          <label>Bonne réponse</label>
+          <input type="text" placeholder="Ex: Rome">
+        </div>
+      </div>
+
+      <button class="add-question-btn">+ Ajouter une autre question</button>
+    </div>
+
+    <!-- Step 3: Review -->
+    <div class="form-step" id="step-3">
+      <h3>Aperçu final de votre examen</h3>
+      <div class="review-section">
+        <p><strong>Titre :</strong> (sera affiché via JS)</p>
+        <p><strong>Description :</strong> (sera affiché via JS)</p>
+        <p><strong>Durée :</strong> ... minutes</p>
+        <p><strong>Note minimale :</strong> ...%</p>
+        <hr>
+        <p><strong>Questions :</strong> (liste dynamique plus tard)</p>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="buttons">
+      <button type="button">⬅ Précédent</button>
+      <button type="button">Suivant ➡</button>
+    </div>
+  </div>
+
+</body>
+</html>
