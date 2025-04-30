@@ -10,9 +10,37 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #6385e8, #2246a1);
-            color: rgb(255, 255, 255);
+            background: linear-gradient(to right, #2e6fd758, #2e6fd75e);
+            color: rgb(235, 79, 12);
         }
+        .animated-text {
+            font-size: 40px;
+            font-weight: bold;
+            color: #ff6600; /* Orange color for the text */
+            display: inline-block;
+            white-space: nowrap;
+            border-right: 3px solid #ff6600; /* This creates the cursor effect */
+            padding-right: 5px;
+            overflow : hidden;
+            width : 0;
+            animation: typing 1.5s steps(70) 0.6s forwards, blink-caret 0.6s step-end infinite;
+       } 
+        /* Typing Animation */
+        @keyframes typing {
+          from {
+            width: 0;
+          }
+          to {
+            width: 15ch; /* Adjust this to match the length of the text */
+          }
+       }
+
+    /* Cursor Blinking Effect */
+        @keyframes blink-caret {
+          50% {
+            border-color: transparent;
+          }
+       }
 
         /* Main content area */
         .main-content {
@@ -22,14 +50,18 @@
         .welcome-message {
             text-align: center;
             margin-top: 50px;
+            color : #f65a07
         }
 
         .welcome-message h1 {
-            font-size: 36px;
+            font-size: 37px;
+            color :#f05b0a
         }
 
         .welcome-message p {
-            font-size: 24px;
+            font-size: 27px;
+            text-align: center; 
+            color:#0727f7           
         }
 
         /* Dashboard Cards */
@@ -41,15 +73,15 @@
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            background: rgba(242, 236, 235, 0.8);
+            border-radius: 18px;
             padding: 20px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .card:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(235, 232, 232, 0.446);
             transform: translateY(-5px);
         }
 
@@ -59,28 +91,28 @@
         }
 
         .card p {
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .btn-create-exam, .btn-view-students, .btn-exam-stats, .btn-account-settings, .btn-notifications, .btn-add-student {
-            background-color: #fd861e;
+            background-color: #f65a07;
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 13px 20px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 18px;
             margin-top: 10px;
         }
 
         .btn-create-exam:hover, .btn-view-students:hover, .btn-exam-stats:hover, .btn-account-settings:hover, .btn-notifications:hover, .btn-add-student:hover {
-            background-color: #3b8fd4;
+            background-color: #0f7dd7;
         }
 
         /* Inclusive Teacher Icon */
         .teacher-icon {
             font-size: 50px;
-            color: #fff;
+            color: #eae6e6;
         }
     </style>
 </head>
@@ -90,7 +122,7 @@
     <main class="main-content">
         <!-- Welcome Message -->
         <section id="welcome-message" class="welcome-message">
-            <h1>Bonjour Professeur</h1>
+            <h1><span class="animated-text">Bonjour Professeur</span></h1>
             <p>Bienvenue sur votre espace enseignant</p>
         </section>
 
